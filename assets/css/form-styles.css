@@ -197,3 +197,19 @@
     line-height: 1.35;
   }
 }
+
+.coolinput input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.85;
+}
+.coolinput input[type="date"] {
+  min-height: 48px;
+  font-size: 18px;
+  font-weight: 700;
+}
+@media (max-width: 575.98px) {
+  .coolinput input[type="date"] {
+    min-height: 44px;
+    font-size: 16px;
+  }
+}
