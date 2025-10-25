@@ -1,0 +1,112 @@
+<header class="topbar border-bottom bg-white sticky-top">
+  <div class="container">
+    <div class="row align-items-center g-0 py-2 flex-nowrap">
+      <div class="col-auto">
+        <a
+          class="topbar__brand d-inline-flex align-items-center"
+          href="quote.html"
+          aria-label="Privalia - Inicio"
+        >
+          <img
+            src="/assets/img/LOGO-PRIVALIA.png"
+            alt="Privalia"
+            class="img-logo"
+          />
+        </a>
+      </div>
+
+      <div class="col"></div>
+
+      <div class="col-auto">
+        <div class="d-none d-sm-flex align-items-center topbar__right">
+          <a
+            href="tel:8778178513"
+            class="d-inline-flex align-items-center me-2"
+            aria-label="Llamar a 877-817-8513"
+          >
+            <span class="img-clip img-clip--phone">
+              <img
+                src="/assets/img/Phone.png"
+                alt="Teléfonos"
+                class="img-phone"
+              />
+            </span>
+          </a>
+          <span class="topbar__sep mx-2" aria-hidden="true"></span>
+          <span
+            class="img-clip img-clip--lang d-inline-flex align-items-center"
+            role="img"
+            aria-label="Idioma Español"
+          >
+            <img
+              src="/assets/img/Language-Español.png"
+              alt="Español"
+              class="img-lang"
+            />
+          </span>
+
+          <span class="topbar__sep mx-2" aria-hidden="true"></span>
+          <span class="small text-muted me-2" data-user-email></span>
+          <a
+            href="#"
+            class="btn btn-sm btn-outline-secondary d-none"
+            data-logout
+            >Salir</a
+          >
+        </div>
+
+        <div class="d-flex d-sm-none align-items-center">
+          <img
+            src="/assets/img/Frame-1.png"
+            alt="Teléfono | Es"
+            class="img-mobile-combo"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  (function () {
+    var href = "/assets/css/header-style.css";
+    if (!document.querySelector('link[href*="header-style.css"]')) {
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href + "?v=10";
+      document.head.appendChild(link);
+    }
+
+    function getSession() {
+      try {
+        return JSON.parse(localStorage.getItem("privalia_auth") || "{}");
+      } catch {
+        return {};
+      }
+    }
+
+    var s = getSession();
+    var emailNode = document.querySelector("[data-user-email]");
+    var logoutBtn = document.querySelector("[data-logout]");
+
+    if (s && s.email && emailNode && logoutBtn) {
+      emailNode.textContent = s.email;
+      logoutBtn.classList.remove("d-none");
+
+      logoutBtn.addEventListener("click", async function (e) {
+        e.preventDefault();
+        try {
+          if (window.PrivaliaAuth?.logout) {
+            await window.PrivaliaAuth.logout();
+          } else {
+            localStorage.removeItem("privalia_auth");
+          }
+        } catch (err) {
+          console.warn("No se pudo cerrar sesión:", err);
+          localStorage.removeItem("privalia_auth");
+        }
+        location.href = "login.html";
+      });
+    }
+  })();
+</script>

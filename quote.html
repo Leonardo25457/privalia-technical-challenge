@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privalia • Get your quote</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Oswald:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/header-style.css" />
+    <link rel="stylesheet" href="/assets/css/form-styles.css" />
+    <link rel="stylesheet" href="/assets/css/footer-style.css" />
+  </head>
+
+  <body class="bg-page">
+    <script>
+      (function () {
+        try {
+          var s = JSON.parse(localStorage.getItem("privalia_auth") || "{}");
+          if (!s || !s.email) location.replace("login.html");
+        } catch (_) {
+          location.replace("login.html");
+        }
+      })();
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="/assets/js/firebase-config.js"></script>
+    <script src="/assets/js/firebase-auth.js"></script>
+    <script src="/assets/js/auth-guard.js" defer></script>
+
+    <div data-include="/assets/partials/header.html"></div>
+
+    <main class="container-fixed main-wrap">
+      <div class="row justify-content-center">
+        <div
+          class="col-12 col-lg-8 d-flex flex-column align-items-start quote-col"
+        >
+          <h1 class="mock-title">Get your quote in 3 easy steps</h1>
+          <p class="mb-2 lead-subtitle">We need your basic details</p>
+
+          <form id="quoteForm" class="mock-form needs-validation" novalidate>
+            <div class="row g-3">
+              <div class="col-6 col-md-6 mb-3">
+                <div class="coolinput">
+                  <label class="text">First Name</label>
+                  <input
+                    type="text"
+                    class="input form-control"
+                    id="firstName"
+                    placeholder="Jhon"
+                    required
+                  />
+                  <span class="check">✓</span>
+                  <div class="invalid-feedback">First name is required.</div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-6">
+                <div class="coolinput">
+                  <label class="text">Last Name</label>
+                  <input
+                    type="text"
+                    class="input form-control"
+                    id="lastName"
+                    placeholder="Doe"
+                    required
+                  />
+                  <span class="check">✓</span>
+                  <div class="invalid-feedback">Last name is required.</div>
+                </div>
+              </div>
+
+              <div class="col-12 mb-3">
+                <div class="coolinput">
+                  <label class="text">Date of Birth</label>
+                  <input
+                    type="text"
+                    class="input form-control"
+                    id="dob"
+                    placeholder="MM/DD/YYYY"
+                    inputmode="numeric"
+                    required
+                  />
+                  <span class="check">✓</span>
+                  <div class="invalid-feedback">
+                    Enter a valid date (MM/DD/YYYY) and be 18+.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 mb-3">
+                <div class="coolinput">
+                  <label class="text">Mobile Phone Number</label>
+                  <input
+                    type="tel"
+                    class="input form-control"
+                    id="phone"
+                    placeholder="987-654-4321"
+                    required
+                  />
+                  <span class="check">✓</span>
+                  <div class="invalid-feedback">Enter a valid phone.</div>
+                </div>
+              </div>
+
+              <div class="col-12 mb-3">
+                <div class="coolinput">
+                  <label class="text">Email Address</label>
+                  <input
+                    type="email"
+                    class="input form-control"
+                    id="email"
+                    placeholder="test@test.com"
+                    required
+                  />
+                  <span class="check">✓</span>
+                  <div class="invalid-feedback">Enter a valid email.</div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="coolinput">
+                  <label class="text">Do you own or rent your home?</label>
+                  <select class="input form-select" id="homeStatus" required>
+                    <option value="" selected disabled>Choose...</option>
+                    <option value="rent">Rent</option>
+                    <option value="own">Own</option>
+                  </select>
+                  <span class="check">✓</span>
+                  <div class="invalid-feedback">Please select an option.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-12">
+                <p class="small lh-base mb-2">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+                <p class="small lh-base mb-0">
+                  It has survived not only five centuries, but also the leap
+                  into electronic typesetting, remaining essentially unchanged.
+                  It was popularised in the 1960s with the release of Letraset
+                  sheets containing Lorem Ipsum passages, and more recently with
+                  desktop publishing software like Aldus PageMaker including
+                  versions of Lorem Ipsum
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-3">
+              <button type="submit" class="btn butn-red btn-lg px-4">
+                Continue
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <div data-include="/assets/partials/footer.html"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/partials-loader.js"></script>
+    <script src="/assets/js/form.js"></script>
+  </body>
+</html>

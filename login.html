@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Iniciar sesión • Privalia</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Oswald:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/login.css" />
+
+    <style>
+      .auth-switch {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin: 10px 0 18px;
+      }
+      .auth-switch .pill {
+        border: 1px solid #e2e6ea;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 12px;
+        background: #fff;
+        color: #6c757d;
+        cursor: pointer;
+      }
+      .auth-switch .pill.active {
+        background: #111;
+        color: #fff;
+        border-color: #111;
+      }
+      .auth-subtle-sep {
+        height: 1px;
+        background: #eef1f4;
+        margin: 10px 0 14px;
+      }
+      .btn-primary.btn-auth {
+        background: #0049c1;
+        border: 0;
+        min-height: 44px;
+        font-weight: 700;
+        border-radius: 999px;
+      }
+      .btn-primary.btn-auth:hover {
+        background: #0049c1;
+      }
+      .tiny {
+        font-size: 12px;
+        color: #6c757d;
+      }
+      .tiny a {
+        color: #111;
+        text-decoration: none;
+      }
+      .tiny a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body class="auth-bg">
+    <div class="auth-bg-illustration"></div>
+
+    <main class="auth-shell">
+      <section class="auth-card">
+        <div class="auth-brand">
+          <img src="/assets/img/logo-privalia.jpg" alt="Privalia" height="28" />
+        </div>
+
+        <h1 class="auth-title" id="authTitle">Iniciar sesión</h1>
+        <p class="auth-legal small">
+          Al continuar, aceptas nuestro <a href="#">Acuerdo de Usuario</a> y
+          reconoces que entiendes la <a href="#">Política de Privacidad</a>.
+        </p>
+
+        <button id="googleBtn" class="btn btn-google w-100 mb-2">
+          <img src="/assets/img/google.svg" alt="" /> Continuar con Google
+        </button>
+
+        <div class="auth-subtle-sep"></div>
+
+        <div class="auth-switch" role="tablist" aria-label="Cambiar modo">
+          <button id="btnModeLogin" class="pill active" type="button">
+            Iniciar sesión
+          </button>
+          <button id="btnModeRegister" class="pill" type="button">
+            Crear cuenta
+          </button>
+        </div>
+
+        <div
+          id="authError"
+          class="alert alert-danger d-none"
+          role="alert"
+        ></div>
+        <div
+          id="authInfo"
+          class="alert alert-success d-none"
+          role="alert"
+        ></div>
+
+        <form id="authForm" class="auth-form needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input
+              id="email"
+              type="email"
+              class="form-control form-control-lg"
+              required
+              placeholder="tu@email.com"
+            />
+            <div class="invalid-feedback">Ingresa un correo válido.</div>
+          </div>
+
+          <div class="mb-2">
+            <label
+              for="password"
+              class="form-label d-flex justify-content-between"
+            >
+              <span>Contraseña</span>
+              <a href="#" class="small text-decoration-none"
+                >¿Olvidaste tu contraseña?</a
+              >
+            </label>
+            <div class="position-relative">
+              <input
+                id="password"
+                type="password"
+                class="form-control form-control-lg pe-5"
+                required
+                placeholder="••••••••"
+                minlength="6"
+              />
+              <button
+                type="button"
+                class="btn btn-sm btn-toggle-pass"
+                aria-label="Mostrar/ocultar"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3.5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="invalid-feedback" id="passFeedback">
+              Ingresa tu contraseña.
+            </div>
+          </div>
+
+          <button
+            id="submitBtn"
+            class="btn btn-primary w-100 btn-auth"
+            type="submit"
+          >
+            Iniciar sesión
+          </button>
+
+          <p class="tiny mt-2 mb-0" id="modeHint">
+            ¿Aún no tienes cuenta? <a href="#" id="linkSwitch">Regístrate</a>
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="/assets/js/firebase-config.js"></script>
+    <script src="/assets/js/firebase-auth.js"></script>
+
+    <script>
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".btn-toggle-pass");
+        if (!btn) return;
+        const input = btn.parentElement.querySelector(
+          'input[type="password"], input[type="text"]'
+        );
+        if (!input) return;
+        input.type = input.type === "password" ? "text" : "password";
+      });
+
+      const $ = (s) => document.querySelector(s);
+      const show = (el) => el.classList.remove("d-none");
+      const hide = (el) => el.classList.add("d-none");
+
+      const authTitle = $("#authTitle");
+      const btnModeLogin = $("#btnModeLogin");
+      const btnModeRegister = $("#btnModeRegister");
+      const submitBtn = $("#submitBtn");
+      const modeHint = $("#modeHint");
+      const passEl = $("#password");
+      const passFeedback = $("#passFeedback");
+      const authForm = $("#authForm");
+      const emailEl = $("#email");
+      const errorBox = $("#authError");
+      const infoBox = $("#authInfo");
+      const googleBtn = $("#googleBtn");
+
+      let mode = "login";
+
+      function clearAlerts() {
+        hide(errorBox);
+        hide(infoBox);
+      }
+      function showError(msg) {
+        errorBox.textContent = msg;
+        show(errorBox);
+      }
+      function showInfo(msg) {
+        infoBox.textContent = msg;
+        show(infoBox);
+      }
+
+      function renderMode() {
+        clearAlerts();
+        if (mode === "login") {
+          authTitle.textContent = "Iniciar sesión";
+          submitBtn.textContent = "Iniciar sesión";
+          btnModeLogin.classList.add("active");
+          btnModeRegister.classList.remove("active");
+          modeHint.innerHTML =
+            '¿Aún no tienes cuenta? <a href="#" id="linkSwitch">Regístrate</a>';
+          passEl.required = true;
+          passEl.minLength = 1;
+          passFeedback.textContent = "Ingresa tu contraseña.";
+        } else {
+          authTitle.textContent = "Crear cuenta";
+          submitBtn.textContent = "Registrarse";
+          btnModeRegister.classList.add("active");
+          btnModeLogin.classList.remove("active");
+          modeHint.innerHTML =
+            '¿Ya tienes cuenta? <a href="#" id="linkSwitch">Iniciar sesión</a>';
+          passEl.required = true;
+          passEl.minLength = 6;
+          passFeedback.textContent =
+            "La contraseña debe tener al menos 6 caracteres.";
+        }
+        $("#linkSwitch")?.addEventListener("click", (e) => {
+          e.preventDefault();
+          mode = mode === "login" ? "register" : "login";
+          renderMode();
+        });
+      }
+
+      btnModeLogin.addEventListener("click", () => {
+        if (mode !== "login") {
+          mode = "login";
+          renderMode();
+        }
+      });
+      btnModeRegister.addEventListener("click", () => {
+        if (mode !== "register") {
+          mode = "register";
+          renderMode();
+        }
+      });
+
+      authForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        clearAlerts();
+        if (!authForm.checkValidity()) {
+          authForm.classList.add("was-validated");
+          return;
+        }
+        const email = emailEl.value.trim();
+        const pass = passEl.value.trim();
+        try {
+          if (mode === "login") await PrivaliaAuth.signIn(email, pass);
+          else {
+            await PrivaliaAuth.register(email, pass);
+            showInfo("Cuenta creada correctamente. ¡Bienvenido!");
+          }
+          window.location.href = "quote.html";
+        } catch (err) {
+          showError(err?.message || "Ocurrió un error, intenta nuevamente.");
+        }
+      });
+
+      googleBtn?.addEventListener("click", async (e) => {
+        e.preventDefault();
+        clearAlerts();
+        try {
+          await PrivaliaAuth.signInWithGoogle();
+          window.location.href = "quote.html";
+        } catch (err) {
+          showError(err?.message || "No se pudo iniciar sesión con Google.");
+        }
+      });
+
+      PrivaliaAuth.onAuth((user) => {
+        if (user) window.location.href = "quote.html";
+      });
+      renderMode();
+    </script>
+  </body>
+</html>

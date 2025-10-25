@@ -1,0 +1,199 @@
+:root {
+  --blue: #0049c1;
+  --bg: #f6f7f9;
+  --text: #111;
+  --label: #3a3a3a;
+  --radius: 14px;
+}
+
+.main-wrap {
+  padding-top: 32px;
+  padding-bottom: 56px;
+}
+
+.quote-col {
+  width: 100%;
+  max-width: 520px;
+  padding-top: 32px;
+  padding-bottom: 40px;
+  gap: 16px;
+}
+
+@media (max-width: 575.98px) {
+  .quote-col {
+    max-width: 100%;
+    padding-top: 20px;
+    padding-bottom: 28px;
+    gap: 14px;
+  }
+}
+
+.mock-title {
+  margin: 0;
+  font-family: "Oswald", "Open Sans", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: #0049c1;
+  text-align: left;
+}
+.lead-subtitle {
+  margin: 0;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #000;
+  text-align: left;
+}
+
+@media (max-width: 575.98px) {
+  .mock-title {
+    font-size: 28px;
+  }
+  .lead-subtitle {
+    font-size: 15px;
+  }
+}
+
+.coolinput {
+  position: relative;
+}
+.coolinput .text {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: #fff;
+  padding: 0 8px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.2;
+  color: #000;
+  z-index: 1;
+}
+
+.coolinput .form-control,
+.coolinput .form-select {
+  background: var(--bg);
+  border: 2px solid var(--blue);
+  border-radius: var(--radius);
+  min-height: 48px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 14px 42px 14px 16px;
+  box-shadow: none;
+  color: var(--text);
+}
+.coolinput .form-control::placeholder {
+  color: #777;
+  opacity: 1;
+}
+
+.coolinput .form-control:focus,
+.coolinput .form-select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(30, 102, 255, 0.15);
+  background: var(--bg);
+}
+
+.coolinput .check {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--blue);
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+.coolinput .form-control:valid ~ .check {
+  opacity: 1;
+}
+
+.coolinput .form-select {
+  --bs-form-select-bg-img: none;
+  --bs-form-select-bg-icon: none;
+  appearance: none;
+  -webkit-appearance: none;
+
+  --caret-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 16 12' fill='none'%3E%3Cpath d='M1 3l7 7 7-7' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: var(--caret-url) !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 14px 10px !important;
+}
+.coolinput .form-select:focus,
+.coolinput .form-select:valid,
+.coolinput .form-select.is-valid,
+.was-validated .coolinput .form-select:valid,
+.coolinput .form-select:focus:valid,
+.coolinput .form-select:active {
+  --bs-form-select-bg-img: none;
+  --bs-form-select-bg-icon: none;
+  background-image: var(--caret-url) !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 14px 10px !important;
+}
+.coolinput select ~ .check {
+  display: none !important;
+}
+.coolinput .form-select::-ms-expand {
+  display: none;
+}
+.coolinput .form-select:invalid {
+  color: #555;
+}
+
+.butn-red {
+  background-color: #ff0004;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 10px;
+}
+.butn-red:hover {
+  background-color: #e60003;
+  color: #ffffff;
+}
+
+@media (min-width: 992px) {
+  .mock-form .row.g-3 {
+    --bs-gutter-y: 0.75rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .coolinput .form-control,
+  .coolinput .form-select {
+    min-height: 44px;
+    font-size: 16px;
+    padding: 12px 40px 12px 14px;
+  }
+  .coolinput .text {
+    top: -9px;
+    left: 12px;
+    font-size: 12px;
+  }
+  .coolinput .check {
+    right: 12px;
+    font-size: 16px;
+  }
+
+  .butn-red {
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+
+  .mock-form p.small {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+}

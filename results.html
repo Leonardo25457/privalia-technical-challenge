@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privalia • Rates</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Oswald:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="/assets/css/header-style.css" />
+    <link rel="stylesheet" href="/assets/css/form-styles.css" />
+    <link rel="stylesheet" href="/assets/css/results-style.css" />
+    <link rel="stylesheet" href="/assets/css/footer-style.css" />
+  </head>
+
+  <body class="bg-page">
+    <script>
+      (function () {
+        try {
+          var s = JSON.parse(localStorage.getItem("privalia_auth") || "{}");
+          if (!s || !s.email) location.replace("login.html");
+        } catch (e) {
+          location.replace("login.html");
+        }
+      })();
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="/assets/js/firebase-config.js"></script>
+    <script src="/assets/js/firebase-auth.js"></script>
+    <script src="/assets/js/auth-guard.js" defer></script>
+
+    <div data-include="/assets/partials/header.html"></div>
+
+    <main class="container-fixed main-wrap">
+      <div class="row g-4 justify-content-center results-row">
+        <div class="col-12 col-lg-8 order-1 order-lg-1">
+          <div
+            class="d-flex align-items-center justify-content-between mb-2 meta-bar"
+          >
+            <div class="d-flex align-items-center gap-2">
+              <span class="meta-pill d-inline-flex align-items-center px-2">
+                <img
+                  src="/assets/img/Frame 627912.png"
+                  alt=""
+                  class="meta-icon"
+                />
+              </span>
+              <span class="meta-pill d-inline-flex align-items-center px-2">
+                <img
+                  src="/assets/img/Frame 627913.png"
+                  alt=""
+                  class="meta-icon"
+                />
+              </span>
+            </div>
+
+            <a
+              href="#"
+              id="btnStartOver"
+              class="start-over d-inline-flex align-items-center gap-2 text-dark text-decoration-none"
+            >
+              <img
+                src="/assets/img/arrows-circle.png"
+                alt=""
+                class="start-over__icon"
+              />
+              <span class="fw-bold">Start Over</span>
+            </a>
+          </div>
+
+          <div class="card shadow-sm border-1 toolbar-card mb-3">
+            <div
+              class="card-body py-2 px-3 d-flex align-items-center justify-content-between"
+            >
+              <div class="d-inline-flex align-items-center gap-2 text-dark">
+                <img
+                  src="/assets/img/Question_Mark 2.svg"
+                  alt=""
+                  class="tb-icon tb-icon--q"
+                />
+                <strong>Select Coverage</strong>
+              </div>
+
+              <div class="dropdown">
+                <button
+                  class="btn btn-link fw-bold text-dark dropdown-toggle p-0 d-inline-flex align-items-center"
+                  data-bs-toggle="dropdown"
+                  type="button"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="/assets/img/Frame 627727.svg"
+                    alt=""
+                    class="tb-icon me-2"
+                  />
+                  <span class="tb-dd-label">State Minimum</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <a class="dropdown-item active" href="#">State Minimum</a>
+                  </li>
+                  <li><a class="dropdown-item" href="#">Full Coverage</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card rates-card rates-card--blue border-2 mb-4">
+            <div
+              class="rates-featured d-flex justify-content-between align-items-start gap-3 p-3"
+            >
+              <div
+                class="rf-left d-flex flex-column align-items-start gap-2 flex-grow-1"
+              >
+                <div class="rf-logo-box">
+                  <img
+                    src="/assets/img/LOGO-PRIVALIA.png"
+                    alt="privalia"
+                    class="rf-logo-img"
+                  />
+                </div>
+                <p class="rf-copy mb-0">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting;
+                </p>
+              </div>
+
+              <div class="text-end rf-right">
+                <a class="btn btn-cta-blue rf-cta cta-fixed fw-bold" href="#"
+                  >Speak with Rep</a
+                >
+                <div class="text-muted small mt-2">Average in your state*</div>
+                <div class="rf-price mt-1">
+                  $129–386 <small class="text-muted">/ mo</small>
+                </div>
+              </div>
+            </div>
+
+            <hr class="rates-sep my-0" />
+            <div
+              class="rate-row rate-row--withbox p-3 d-flex justify-content-between align-items-start"
+            >
+              <div class="rate-col-left d-flex flex-column align-items-start">
+                <div class="rate-logo-box mb-2">
+                  <img
+                    src="/assets/img/LOGO-PRIVALIA.png"
+                    alt="privalia"
+                    class="rate-logo-img"
+                  />
+                </div>
+                <a href="#" class="see-plan see-plan--check"
+                  >See Plan Details</a
+                >
+              </div>
+              <div class="text-end rate-col-right">
+                <a class="btn btn-cta-red cta-fixed fw-bold mb-2" href="#"
+                  >Buy Online</a
+                >
+                <div class="rate-price mb-0">$144.33 <small>/ mo</small></div>
+              </div>
+            </div>
+
+            <hr class="rates-sep my-0" />
+            <div
+              class="rate-row rate-row--withbox p-3 d-flex justify-content-between align-items-start"
+            >
+              <div class="rate-col-left d-flex flex-column align-items-start">
+                <div class="rate-logo-box mb-2">
+                  <img
+                    src="/assets/img/LOGO-PRIVALIA.png"
+                    alt="privalia"
+                    class="rate-logo-img"
+                  />
+                </div>
+                <a href="#" class="see-plan see-plan--check"
+                  >See Plan Details</a
+                >
+              </div>
+              <div class="text-end rate-col-right">
+                <a class="btn btn-cta-red cta-fixed fw-bold mb-2" href="#"
+                  >Buy with Agent</a
+                >
+                <div class="rate-price mb-0">$159.13 <small>/ mo</small></div>
+              </div>
+            </div>
+
+            <hr class="rates-sep my-0" />
+
+            <div
+              class="rate-row rate-row--withbox p-3 d-flex justify-content-between align-items-start"
+            >
+              <div class="rate-col-left d-flex flex-column align-items-start">
+                <div class="rate-logo-box mb-2">
+                  <img
+                    src="/assets/img/LOGO-PRIVALIA.png"
+                    alt="privalia"
+                    class="rate-logo-img"
+                  />
+                </div>
+                <a href="#" class="see-plan see-plan--check"
+                  >See Plan Details</a
+                >
+              </div>
+              <div class="text-end rate-col-right">
+                <a class="btn btn-cta-red cta-fixed fw-bold mb-2" href="#"
+                  >Buy Online</a
+                >
+                <div class="rate-price mb-0">$44.33 <small>/ mo</small></div>
+              </div>
+            </div>
+
+            <div class="text-center py-3">
+              <a
+                href="#"
+                class="fw-bold text-decoration-underline d-inline-flex align-items-center gap-2"
+                style="color: #000000"
+              >
+                Click to view more rates <i class="bi bi-plus-circle"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="text-center fw-bold mb-1 compare-title">
+            Compare with Other Companies
+          </div>
+          <div class="card compare-card border-2 mb-4">
+            <div
+              class="compare-row p-3 d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex align-items-center">
+                <div class="rate-logo-box me-3">
+                  <img
+                    src="/assets/img/LOGO-PRIVALIA.png"
+                    alt="privalia"
+                    class="rate-logo-img"
+                  />
+                </div>
+              </div>
+              <a class="btn btn-cta-red cta-fixed fw-bold" href="#"
+                >View Rate</a
+              >
+            </div>
+            <hr class="compare-sep my-0" />
+            <div
+              class="compare-row p-3 d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex align-items-center">
+                <div class="rate-logo-box me-3">
+                  <img
+                    src="/assets/img/LOGO-PRIVALIA.png"
+                    alt="privalia"
+                    class="rate-logo-img"
+                  />
+                </div>
+              </div>
+              <a class="btn btn-cta-red cta-fixed fw-bold" href="#"
+                >View Rate</a
+              >
+            </div>
+            <hr class="compare-sep my-0" />
+            <div
+              class="compare-row p-3 d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex align-items-center">
+                <div class="rate-logo-box me-3">
+                  <img
+                    src="/assets/img/LOGO-PRIVALIA.png"
+                    alt="privalia"
+                    class="rate-logo-img"
+                  />
+                </div>
+              </div>
+              <a class="btn btn-cta-red cta-fixed fw-bold" href="#"
+                >View Rate</a
+              >
+            </div>
+            <hr class="compare-sep my-0" />
+            <div
+              class="compare-row p-3 d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex align-items-center">
+                <div class="rate-logo-box me-3">
+                  <img
+                    src="/assets/img/LOGO-PRIVALIA.png"
+                    alt="privalia"
+                    class="rate-logo-img"
+                  />
+                </div>
+              </div>
+              <a class="btn btn-cta-red cta-fixed fw-bold" href="#"
+                >View Rate</a
+              >
+            </div>
+
+            <div class="text-center py-3">
+              <a
+                href="#"
+                class="fw-bold text-decoration-underline d-inline-flex align-items-center gap-2"
+                style="color: #000000"
+              >
+                Click to view more rates <i class="bi bi-plus-circle"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="results-paragraphs mt-3">
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book.
+            </p>
+            <p>
+              It has survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </p>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book.
+            </p>
+            <p>
+              It has survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </p>
+          </div>
+        </div>
+
+        <aside class="col-12 col-lg-4 order-2 order-lg-2">
+          <div class="details-wrap">
+            <section
+              id="detailsContact"
+              class="detail-section"
+              data-collapsible
+            >
+              <button type="button" class="detail-header" aria-expanded="true">
+                <span class="dash"></span>
+                <span class="title">Your Contact Details</span>
+                <i class="ok bi bi-check-circle-fill"></i>
+              </button>
+              <div class="detail-body">
+                <div>
+                  Jhon Doe
+                  <a href="#" class="edit-inline"
+                    ><i class="bi bi-pencil-square"></i> Edit</a
+                  >
+                </div>
+                <div>10001</div>
+                <div>jdoe@user.com</div>
+              </div>
+            </section>
+
+            <section
+              id="detailsDrivers"
+              class="detail-section collapsed"
+              data-collapsible
+            >
+              <button type="button" class="detail-header" aria-expanded="false">
+                <span class="dash"></span>
+                <span class="title">Drivers</span>
+                <i class="ok bi bi-check-circle-fill"></i>
+              </button>
+              <div class="detail-body">
+                <div>10001</div>
+                <div>jdoe@user.com</div>
+              </div>
+            </section>
+
+            <section
+              id="detailsVehicles"
+              class="detail-section collapsed"
+              data-collapsible
+            >
+              <button type="button" class="detail-header" aria-expanded="false">
+                <span class="dash"></span>
+                <span class="title">Vehicles</span>
+                <i class="ok bi bi-check-circle-fill"></i>
+              </button>
+              <div class="detail-body">
+                <div>
+                  2017 Acura
+                  <a href="#" class="edit-inline"
+                    ><i class="bi bi-pencil-square"></i> Edit</a
+                  >
+                </div>
+                <div>ILX DYNAMIC</div>
+              </div>
+            </section>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <div data-include="/assets/partials/footer.html"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/partials-loader.js"></script>
+    <script src="/assets/js/rates.js"></script>
+    <script src="/assets/js/results.js"></script>
+
+    <script>
+      document
+        .getElementById("btnStartOver")
+        ?.addEventListener("click", (e) => {
+          e.preventDefault();
+          localStorage.removeItem("privalia_quote");
+          window.location.href = "quote.html";
+        });
+
+      document
+        .querySelectorAll("[data-collapsible] .detail-header")
+        .forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const section = btn.closest("[data-collapsible]");
+            const body = section.querySelector(".detail-body");
+            const isOpen = !section.classList.contains("collapsed");
+            section.classList.toggle("collapsed", isOpen);
+            btn.setAttribute("aria-expanded", String(!isOpen));
+            body.style.display = isOpen ? "none" : "block";
+          });
+          const section = btn.closest("[data-collapsible]");
+          if (section.classList.contains("collapsed")) {
+            section.querySelector(".detail-body").style.display = "none";
+          }
+        });
+    </script>
+  </body>
+</html>
